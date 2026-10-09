@@ -63,27 +63,15 @@ div[data-baseweb="select"]>div,div[data-baseweb="input"]>div{background:#111e34;
 @keyframes gradMove{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
 @keyframes bandIn{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:translateX(0)}}
 
-.topbar{animation:slideDown .7s ease both}
-.hero h1{animation:fadeUp .8s ease both}
-.hero p{animation:fadeUp .8s .15s ease both}
-.feat div{animation:fadeUp .8s ease both;transition:transform .3s}
-.feat div:nth-child(1){animation-delay:.25s}
-.feat div:nth-child(2){animation-delay:.4s}
-.feat div:nth-child(3){animation-delay:.55s}
+.feat div{transition:transform .3s}
 .feat div:hover{transform:translateY(-6px)}
-.panel{animation:fadeUp .8s .3s ease both;transition:transform .3s,border-color .3s}
+.panel{transition:transform .3s,border-color .3s}
 .panel:hover{transform:translateY(-4px);border-color:#5b4bd6}
-.step{animation:fadeUp .7s ease both;transition:transform .3s,border-color .3s}
+.step{transition:transform .3s,border-color .3s}
 .step:hover{transform:translateX(6px);border-color:#5b4bd6}
 .ring-inner .big{animation:popIn .9s .4s ease both}
 .result{animation:fadeUp .8s 1s ease both}
 .sugg{animation:fadeUp .8s .6s ease both}
-.band{animation:bandIn .6s ease both}
-.band:nth-of-type(1){animation-delay:.5s}
-.band:nth-of-type(2){animation-delay:.65s}
-.band:nth-of-type(3){animation-delay:.8s}
-.band:nth-of-type(4){animation-delay:.95s}
-.band:nth-of-type(5){animation-delay:1.1s}
 div.stButton>button{background-size:200% 200%;animation:gradMove 3s ease infinite;transition:transform .2s,box-shadow .2s}
 div.stButton>button:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 8px 24px rgba(146,60,255,.5)}
 div.stButton>button:active{transform:scale(.97)}
@@ -97,6 +85,32 @@ with st.sidebar:
     page = st.radio("NAVIGATION", ["🔮 Prediction", "ℹ️ About Project", "💡 Mental Health Tips"])
     st.divider()
     st.caption("This tool gives a model estimate for educational use. It is not a medical diagnosis.")
+
+# Page-load animations play only when a page is first opened, not on every widget rerun.
+# (On Streamlit Cloud every slider change reruns the app, which made animations replay and look broken.)
+animate_load = st.session_state.get("last_page") != page
+st.session_state["last_page"] = page
+
+if animate_load:
+    st.markdown("""
+    <style>
+    .topbar{animation:slideDown .7s ease both}
+    .hero h1{animation:fadeUp .8s ease both}
+    .hero p{animation:fadeUp .8s .15s ease both}
+    .feat div{animation:fadeUp .8s ease both}
+    .feat div:nth-child(1){animation-delay:.25s}
+    .feat div:nth-child(2){animation-delay:.4s}
+    .feat div:nth-child(3){animation-delay:.55s}
+    .panel{animation:fadeUp .8s .3s ease both}
+    .step{animation:fadeUp .7s ease both}
+    .band{animation:bandIn .6s ease both}
+    .band:nth-of-type(1){animation-delay:.5s}
+    .band:nth-of-type(2){animation-delay:.65s}
+    .band:nth-of-type(3){animation-delay:.8s}
+    .band:nth-of-type(4){animation-delay:.95s}
+    .band:nth-of-type(5){animation-delay:1.1s}
+    </style>
+    """, unsafe_allow_html=True)
 
 # ---------- Top bar ----------
 st.markdown("""
@@ -281,7 +295,7 @@ with right:
 
             st.markdown(f"""
             <div class="panel">
-              <div class="ring" style="--target:{percent*3.6};background:conic-gradient({colour} calc(var(--p)*1deg),#1d2a46 0deg);animation:fillRing 1.6s ease-out forwards;box-shadow:0 0 24px {colour}55">
+              <div class="ring" style="--target:{percent*3.6};--p:{percent*3.6};background:conic-gradient({colour} calc(var(--p)*1deg),#1d2a46 0deg);animation:fillRing 1.6s ease-out forwards;box-shadow:0 0 24px {colour}55">
                 <div class="ring-inner">
                   <div class="big">{prediction:.1f}</div>
                   <div class="muted">/ {MAX_SCORE:.0f}</div>
