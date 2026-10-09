@@ -6,7 +6,7 @@ StudentMind is a machine-learning web app that estimates a student's `Mental_Hea
 
 ## Live Demo
 
-[Open StudentMind on Streamlit Community Cloud](https://mental-health-score-ltmvhz8vfl7xc8746dzeym.streamlit.app/)
+[Student Mind Predictor WebApp](https://mental-health-score-ltmvhz8vfl7xc8746dzeym.streamlit.app/)
 
 ## Dataset
 
