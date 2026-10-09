@@ -24,7 +24,8 @@ st.markdown("""
 <style>
 .stApp{background:radial-gradient(circle at 80% 0%,#17143b 0,#07111f 38%,#050b16 78%);color:#f4f7ff}
 [data-testid="stSidebar"]{background:linear-gradient(180deg,#0b1427,#080e1b);border-right:1px solid #1d2a46}
-.block-container{padding-top:1rem;max-width:1450px}
+[data-testid="stAppViewContainer"]{zoom:0.65}  /* change 0.65 to 0.7 or 0.75 if it looks too small */
+.block-container{padding-top:1rem;max-width:2200px}
 h1,h2,h3,h4,p,label,span,li{color:#f4f7ff}
 .topbar{padding:.8rem 1.2rem;border-bottom:1px solid #1d2a46;margin-bottom:1.2rem}
 .logo{font-size:1.6rem;font-weight:800}
