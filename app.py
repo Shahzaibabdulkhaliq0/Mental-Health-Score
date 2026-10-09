@@ -236,10 +236,10 @@ with left:
     values["Stress_Level"] = c4.selectbox("Stress Level", ["Low", "Medium", "High", "Very High"])
 
     c1, c2, c3, c4 = st.columns(4)
-    values["Sleep_Hours_Per_Night"] = c1.slider("Sleep (hours)", 0.0, 24.0, 7.0, 0.5)
-    values["Study_Hours"] = c2.slider("Study (hours/day)", 0.0, 24.0, 4.0, 0.5)
-    values["Avg_Daily_Usage_Hours"] = c3.slider("Screen Time (hours)", 0.0, 24.0, 5.0, 0.5)
-    values["Physical_Activity_Hours"] = c4.slider("Activity (hours)", 0.0, 24.0, 1.0, 0.5)
+    values["Sleep_Hours_Per_Night"] = c1.slider("Sleep (hours)", 0.0, 12.0, 7.0, 0.5)
+    values["Study_Hours"] = c2.slider("Study (hours/day)", 0.0, 12.0, 4.0, 0.5)
+    values["Avg_Daily_Usage_Hours"] = c3.slider("Screen Time (hours)", 0.0, 12.0, 5.0, 0.5)
+    values["Physical_Activity_Hours"] = c4.slider("Activity (hours)", 0.0, 6.0, 1.0, 0.5)
 
     c1, c2, c3, c4 = st.columns(4)
     values["Daily_Unlocks"] = c1.number_input("Daily Phone Unlocks", 0, 500, 50, 1)
