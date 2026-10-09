@@ -24,13 +24,13 @@ BANDS = [
 # html font-size shrinks every rem-based Streamlit size (fonts, paddings, widgets) without using CSS zoom.
 st.markdown("""
 <style>
-html{font-size:13px}
+html{font-size:16px}
 .stApp{background:radial-gradient(circle at 80% 0%,#17143b 0,#07111f 38%,#050b16 78%);color:#f4f7ff}
 [data-testid="stHeader"]{display:none}
 #MainMenu,footer{visibility:hidden}
 .block-container,[data-testid="stMainBlockContainer"]{padding:.8rem 1.5rem 0 1.5rem!important;max-width:100%!important}
 [data-testid="stSidebar"]{background:linear-gradient(180deg,#0b1427,#080e1b);border-right:1px solid #1d2a46}
-[data-testid="stSidebar"][aria-expanded="true"]{width:190px!important;min-width:190px!important;max-width:190px!important}
+[data-testid="stSidebar"][aria-expanded="true"]{width:225px!important;min-width:225px!important;max-width:225px!important}
 [data-testid="stSidebarContent"]{padding-top:.5rem}
 [data-testid="stVerticalBlock"]{gap:.45rem}
 [data-testid="stHorizontalBlock"]{gap:.8rem}
@@ -62,7 +62,17 @@ h1,h2,h3,h4,p,label,span,li{color:#f4f7ff}
 .tbl th{text-align:left;color:#50d9ef;border-bottom:1px solid #263451;padding:.25rem .5rem}
 .tbl td{border-bottom:1px solid #1a2744;padding:.2rem .5rem;color:#d7e0f2}
 div.stButton>button{border:0;border-radius:10px;color:white;font-weight:700;min-height:2.4rem;background:linear-gradient(90deg,#923cff,#287dff);width:100%}
-div[data-baseweb="select"]>div,div[data-baseweb="input"]>div{background:#111e34;border-color:#2a3c5d;border-radius:8px;min-height:2.3rem}
+div[data-baseweb="select"]>div,div[data-baseweb="input"]>div{background:#111e34!important;border-color:#2a3c5d;border-radius:8px;min-height:2.3rem}
+/* Text inside dropdowns and inputs was dark on a dark box, so it was invisible. Force light text. */
+div[data-baseweb="select"] *,div[data-baseweb="input"] *{color:#f4f7ff!important}
+div[data-baseweb="select"] svg{fill:#aebed8!important}
+input{color:#f4f7ff!important;-webkit-text-fill-color:#f4f7ff!important;background:transparent!important}
+[data-testid="stNumberInput"] button{background:#16243f!important;color:#f4f7ff!important;border-color:#2a3c5d!important}
+[data-testid="stNumberInput"] button svg{fill:#f4f7ff!important}
+/* Dropdown list that opens when you click a select box */
+[data-baseweb="popover"] [data-baseweb="menu"],[data-baseweb="popover"] ul{background:#111e34!important}
+[data-baseweb="popover"] li,[data-baseweb="popover"] li *{color:#f4f7ff!important;background:transparent}
+[data-baseweb="popover"] li:hover,[data-baseweb="popover"] li[aria-selected="true"]{background:#1f3158!important}
 .stTabs [data-baseweb="tab-list"]{gap:.3rem}
 .stTabs [data-baseweb="tab"]{padding:.3rem .8rem}
 
@@ -213,7 +223,7 @@ except Exception as e:
     st.error(f"Could not load the saved model. Details: {e}")
     st.stop()
 
-left, right = st.columns([2.4, 1])
+left, right = st.columns([2, 1])
 values = {}
 
 with left:
@@ -249,7 +259,7 @@ with right:
     result_html = """
     <div class="panel"><div class="row">
       <div class="ring" style="background:#1d2a46"><div class="ring-inner"><div class="big">—</div></div></div>
-      <div class="rtext"><b>Ready when you are</b><br><span class="muted">Fill in the form and click Predict.</span></div>
+      <div class="rtext"><b>Ready when you are</b><br><span class="muted">Fill the form, then click Predict.</span></div>
     </div></div>
     """
 
